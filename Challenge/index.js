@@ -18,7 +18,7 @@ function newEmployee() {
                 'Manager',
                 'Engineer',
                 'Intern',
-                'Employee'
+                // 'Employee'
             ]
         },
         {
@@ -56,10 +56,38 @@ function newEmployee() {
                 })
                 break;
             case 'Intern':
-                //ask about school
+                inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'school',
+                        message: 'What school do you attend?'
+                    }
+                ]).then(({ school }) => {
+                    employees.push(new Intern(
+                        name,
+                        id,
+                        email,
+                        school
+                    ))
+                    another()
+                })
                 break;
             case 'Engineer':
-                //ask about GitHub
+                inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'github',
+                        message: 'Enter your Github profile'
+                    }
+                ]).then(({ github }) => {
+                    employees.push(new Engineer(
+                        name,
+                        id,
+                        email,
+                        github
+                    ))
+                    another()
+                })
                 break;
             default:
                 //uh oh
@@ -90,6 +118,7 @@ function renderHTMLFile() {
                     <div>
                         <h1>${employee.getName()}</h1>
                         <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a>
+
                     </div>
                 </li>
             `)}
