@@ -110,6 +110,16 @@ function another() {
 
 }
 
+function section(employee) {
+    if(employee.getRole() === "Engineer"){
+        return `<a href="https://www.github.com/${employee.getGithub()}">${employee.getGithub()}</a>`
+    } else if(employee.getRole() === "Intern") {
+        return `School: ${employee.getSchool()}`
+    } else {
+        return `Office Number: ${employee.getOfficeNumber()}`
+    }
+}
+
 function renderHTMLFile() {
     fs.writeFileSync('./index.html', /*html*/`
         <ul>
@@ -118,13 +128,12 @@ function renderHTMLFile() {
                     <div>
                         <h1>${employee.getName()}</h1>
                         <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a>
-
+                        ${section(employee)}
                     </div>
                 </li>
             `)}
         </ul>
     `)
-    // <a href="https://www.github.com/${employee.getGithub()}">${employee.getGithub()}</a>
 }
 
 
