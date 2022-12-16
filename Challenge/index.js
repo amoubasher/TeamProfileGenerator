@@ -136,5 +136,20 @@ function renderHTMLFile() {
     `)
 }
 
+// function renderHTMLFile() {
+//     fs.writeFileSync('./index.html', /*html*/`
+//         <ul>
+//             ${employees.map(employee => /*html*/`
+//                 <li>
+//                     <div>
+//                         <h1>${employee.getName()}</h1>
+//                         <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a>
+//                         ${section(employee)}
+//                     </div>
+//                 </li>
+//             `)}
+//         </ul>
+//     `)
+// }
 
 newEmployee()
