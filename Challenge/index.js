@@ -1,4 +1,4 @@
-
+// Add all required modules
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
@@ -8,7 +8,8 @@ const Employee = require('./lib/Employee');
 
 const employees = [];
 
-//TODO - write your inquirer app here to gather information about the team members, and generate the HTML file using fs
+//Writes your inquirer app here to gather information about the team members, and generate the HTML file using fs
+// function to initialize program to prompt user for input
 function newEmployee() {
     inquirer.prompt([
         {
@@ -113,6 +114,7 @@ function newEmployee() {
     })
 }
 
+// Function to ask user to create another employee
 function another() {
     
     return inquirer.prompt([
@@ -127,6 +129,9 @@ function another() {
     })
 
 }
+
+
+// Make use-cases for each employee type
 
 function section(employee) {
     if(employee.getRole() === "Engineer"){
@@ -144,6 +149,8 @@ function section(employee) {
     }
 }
 
+
+// Function to make the HTML file w all the additions
 function renderHTMLFile() {
     fs.writeFileSync('./index.html', /*html*/`
     <!DOCTYPE html>
@@ -164,13 +171,12 @@ function renderHTMLFile() {
         <h1>Meet the Team!</h1> 
     </div>
 
-    <!-- ADD A CARD BOOTSTRAP TO EACH DIV, STYLE ACCORDINGLY -->
     <div class="container-fluid mt-5">
         <div>
             <ul class="row text-center" style="list-style: none;">
                  ${employees.map(employee => /*html*/`
                     <li class="col-sm-4">
-                        <div class="card mx-auto col bg-light" style="width:400px; height:400px">
+                        <div class="card mx-auto col bg-light mb-5" style="width:400px; height:400px">
                             <div class="card-body d-flex flex-column"> 
                                 <h1 class="card-title mb-5">${employee.getName()}</h1>
                                     <div>
@@ -190,9 +196,7 @@ function renderHTMLFile() {
 }
 
 
-
-// line 150                 ${employees.map(employee => /*html*/`
-// line 168                 ${employees.map(employee => /*html*/`
+// KEEP FOR REFERENCE FOR LATER
 
 // function renderHTMLFile() {
 //     fs.writeFileSync('./index.html', /*html*/`
