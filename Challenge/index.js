@@ -4,6 +4,7 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const inquirer = require('inquirer');
 const fs = require('fs');
+const Employee = require('./lib/Employee');
 
 const employees = [];
 
@@ -18,7 +19,7 @@ function newEmployee() {
                 'Manager',
                 'Engineer',
                 'Intern',
-                // 'Employee'
+                'Employee'
             ]
         },
         {
@@ -38,6 +39,23 @@ function newEmployee() {
         }
     ]).then(({ position, email, id, name }) => {
         switch(position){
+            case 'Employee':
+                inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'role',
+                        message: 'What is your official role?'
+                    }
+                ]).then(({ role }) => {
+                    employees.push(new Employee(
+                        name,
+                        id,
+                        email,
+                        role
+                    ))
+                    another()
+                })
+                break;
             case 'Manager':
                 inquirer.prompt([
                     {
@@ -117,9 +135,12 @@ function section(employee) {
     } else if(employee.getRole() === "Intern") {
         return `<p> School: ${employee.getSchool()} </p>
                 <h2> Intern </h2>`
-    } else {
+    } else if (employee.getRole() === "Manager") {
         return `<p> Office Number: ${employee.getOfficeNumber()} </p>
                 <h2> Manager </h2>`
+    } else {
+        return `<p> Role: ${employee.getRole()} </p>
+                <h2> Employee </h2>`
     }
 }
 
@@ -147,7 +168,7 @@ function renderHTMLFile() {
     <div class="container-fluid mt-5">
         <div>
             <ul class="row text-center" style="list-style: none;">
-                ${employees.map(employee => /*html*/`
+                 ${employees.map(employee => /*html*/`
                     <li class="col-sm-4">
                         <div class="card mx-auto col bg-light" style="width:400px; height:400px">
                             <div class="card-body d-flex flex-column"> 
@@ -159,17 +180,19 @@ function renderHTMLFile() {
                             </div>
                         </div>
                     </li>
+                    `)}
             </ul>
         </div>
     </div>
 
 </body>
-</html>
-    `)
-}
-`)
+</html>`)
 }
 
+
+
+// line 150                 ${employees.map(employee => /*html*/`
+// line 168                 ${employees.map(employee => /*html*/`
 
 // function renderHTMLFile() {
 //     fs.writeFileSync('./index.html', /*html*/`
