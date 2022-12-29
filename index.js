@@ -180,7 +180,7 @@ function renderHTMLFile() {
                             <div class="card-body d-flex flex-column"> 
                                 <h1 class="card-title mb-5">${employee.getName()}</h1>
                                     <div>
-                                        <a class="mt-5" href="mailto:${employee.getEmail()}">${employee.getEmail()}</a>
+                                        <a class="mt-5" target="_blank" href="mailto:${employee.getEmail()}">${employee.getEmail()}</a>
                                         <p class="align-bottom">${section(employee)}</p>
                                     </div>
                             </div>
